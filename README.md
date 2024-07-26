@@ -1,1 +1,1 @@
-Ready Set Boole project from 42 School
+Ready Set Bool project from 42 School
