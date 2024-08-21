@@ -7,7 +7,10 @@ def eval_formula(formula: str) -> bool:
 		if element == ' ':
 			continue
 		if element == "!":
-			negation = True
+			if negation:
+				negation = False
+			else:
+				negation = True
 			continue
 		if element in symbol:
 			if len(stack) < 2:
