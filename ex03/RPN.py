@@ -39,6 +39,4 @@ def eval_formula(formula: str) -> bool:
 				stack.append(element)
 		else:
 			return "Error"
-	if stack[-1]:
-		return True
-	return False
+	return stack[-1]
