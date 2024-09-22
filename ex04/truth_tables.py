@@ -2,7 +2,7 @@ import itertools
 import sys
 
 sys.path.append("../")
-from ex03.RPN import eval_formula
+from ex03.BooleanEvaluation import eval_formula
 
 def print_truth_table(formula: str) -> None:
 	counter = 0
