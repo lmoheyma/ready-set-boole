@@ -34,3 +34,10 @@ def print_truth_table(formula: str) -> None:
 		for value in combinations[k]:
 			print(f"| {value} ", end="")
 		print(f"| {int(eval_formula(new_formula))} |")
+
+
+def main():
+	print_truth_table("AB&C|")
+
+if __name__ == "__main__":
+	main()
