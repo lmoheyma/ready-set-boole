@@ -32,33 +32,16 @@ class ASTNode:
 			exit(1)
 		return stack[0]
 
-
-	def tree_computation(self, node):
-		ops = {
-			'&': lambda a, b: a & b,
-			'|': lambda a, b: a | b,
-			'=': lambda a, b: a == b,
-			'^': lambda a, b: a ^ b,
-			'>': lambda a, b: (a ^ 1) | b,
-			'!': lambda a: not a
-		}
-		if node.value not in ops:
-			try:
-				if node.value.isdigit():
-					return bool(int(node.value))
-				else:
-					return node.value
-			except ValueError:
-				raise ValueError(f"Invalid Value: {node.value}")
-		token_list = {"&": 2, "|": 2, "^": 2, ">": 2, "=": 2, "!": 1}
-		if token_list[node.value] == 1:
-			operand = self.tree_computation(node.left)
-			res = ops[node.value](operand)
-		else:
-			left = self.tree_computation(node.left)
-			right = self.tree_computation(node.right)
-			res = ops[node.value](left, right)
-		return res
+	def parsing(self, node):
+		if node is not None:
+			self.parsing(node.right)
+			if node.value == "&":
+				node.value = "|"
+			elif node.value == "|":
+				node.value = "&"
+			if node.value.isalpha():
+				node.value += "!"
+			self.parsing(node.left)
 
 
 	def print_tree(self, node, level=0):
