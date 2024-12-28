@@ -35,9 +35,5 @@ def print_truth_table(formula: str) -> None:
 			print(f"| {value} ", end="")
 		print(f"| {int(eval_formula(new_formula))} |")
 
-
-def main():
-	print_truth_table("AB&C|")
-
 if __name__ == "__main__":
-	main()
+	print_truth_table("AB&C|")

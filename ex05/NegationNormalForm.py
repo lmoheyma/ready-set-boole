@@ -19,13 +19,13 @@ class NegationNormalForm:
 		# 		else:
 		# 			NNF += element + "!"	
 		AST.print_tree(rootNode, 0)
-		rootNode = rootNode.left
-		AST.parsing(rootNode)
+		# rootNode = rootNode.left
+		# AST.parsing(rootNode)
 		# AST.print_tree(rootNode, 0)
-		self.printNNF(rootNode)
+		self.ASTToNNF(rootNode)
 		print()
 
-	def printNNF(self, node):
+	def ASTToNNF(self, node):
 		if node is not None:
 			self.printNNF(node.right)
 			self.NNF += node.value
@@ -33,15 +33,25 @@ class NegationNormalForm:
 
 
 def main():
-	NNF = NegationNormalForm()
-	# NegationNormalForm("AB&!")
-	NNF.formulaToAST("AB|C&!")
-	NNF.NNF = NNF.NNF[::-1]
-	for i in range(len(NNF.NNF)):
-		if NNF.NNF[i].isalpha():
-			NNF.NNF[i] = "!"
-		elif NNF.NNF[i] == "!":
-			
+	def preEvaluating(formula: str):
+		special_cases = {
+			'AB>': 'A!B|',
+			'AB=': 'AB&A!B!&|'
+		}
+		for case in special_cases:
+			if case in formula:
+				startIndex = formula.find(case)
+				formula = formula[:startIndex] + special_cases[case] + formula[startIndex + 3:]
+	# NNF = NegationNormalForm()
+	# NNF.formulaToAST("AB&!")
+	formula = 'AB&!'
+	res = ''
+	preEvaluating(formula)
+	if formula[-1]:
+		for element in formula:
+			if element.isalpha():
+				res.append(element + '!')
+
 	# NegationNormalForm("A!B!&C!|")
 
 if __name__ == "__main__":
